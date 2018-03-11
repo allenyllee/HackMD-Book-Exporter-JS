@@ -1,5 +1,5 @@
 // ============
-// get page link list
+// get page link from bookmode sidebar
 // ============
 // javascript - How to use document.evaluate() and XPath to get a list of elements? - Stack Overflow
 // https://stackoverflow.com/questions/36303869/how-to-use-document-evaluate-and-xpath-to-get-a-list-of-elements
@@ -37,17 +37,47 @@ function getElementsByXPath(xpath, memberName, parent) {
 var myLink = getElementsByXPath("//ul[@class='nav nav-pills nav-stacked']/li/a");
 
 //===========
-// get iFrame element in book mode
+// get iFrame element from bookmode content
 //===========
 function getframe(){
+    // Location href Property
+    // https://www.w3schools.com/jsref/prop_loc_href.asp
+    // 透過HTML DOM 的 Location Object 的 href Property 取得目前頁面的URL
     var str = location.href;
+    // JavaScript String Methods
+    // https://www.w3schools.com/js/js_string_methods.asp
+    // 分析HackMD 的網址，知道是以字串"https%3A%2F%2Fhackmd.io%2F"開頭到結束的整串去除%符號，作為iframe 的id
+    // 利用 indexOf() 方法找出字串位置，再利用slice() 進行切割
+    // 最後利用replace()方法使用RegEx 將所有%符號移除
     var pos = str.indexOf("https%3A%2F%2Fhackmd.io%2F");
     str = str.slice(pos);
-    str = str.replace(/%/g, "");
+    str = str.replace(/%/g,"");
+    // javascript - Get element from within an iFrame - Stack Overflow
+    // https://stackoverflow.com/questions/1088544/get-element-from-within-an-iframe
+    // 從iframe 的id 取回裡面的內容
     return document.getElementById(str);
 }
 
 var myFrame = getframe();
+
+//===============
+// trigger click to download .md file event from bookmode iframe element
+//===============
+function triggerDownload(Frame){
+    var innerDoc = Frame.contentDocument || Frame.contentWindow.document;
+    // HTML DOM getElementsByClassName() Method
+    // https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
+    // 從iframe 取回的內容找到"ui-download-markdown"類別
+    // x 包含兩個物件，我們要的是第二個x[1]
+    var x = innerDoc.getElementsByClassName("ui-download-markdown");
+    //How to trigger event in JavaScript? - Stack Overflow
+    //https://stackoverflow.com/questions/2490825/how-to-trigger-event-in-javascript
+    // 模仿按下下載連結時觸發click event
+    var event = new CustomEvent('click', {bubbles: true, cancelable: true});
+    x[1].dispatchEvent(event);
+}
+
+
 
 //============
 // go to next page link callback function
@@ -96,12 +126,15 @@ function onloadUnregister(onloadHandler){
 }
 
 //=============
-// register onload event to the frame
+// register onload event to the bookmode content iframe
 //=============
-myFrame.onload = function() { gotoNextLink(onloadUnregister, myFrame.onload); };
+myFrame.onload = function() {
+    gotoNextLink(onloadUnregister, myFrame.onload);
+    triggerDownload(myFrame);
+};
 
 //===========
-// trigger onload event to the frame
+// trigger onload event to the current bookmode content iframe
 //===========
 // Force a window.onload event in javascript - Stack Overflow
 // https://stackoverflow.com/questions/9642823/force-a-window-onload-event-in-javascript
@@ -110,4 +143,3 @@ myFrame.onload = function() { gotoNextLink(onloadUnregister, myFrame.onload); };
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 //
 myFrame.dispatchEvent(new Event('load'));
-
