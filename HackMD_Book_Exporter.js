@@ -35,6 +35,7 @@ function getElementsByXPath(xpath, memberName, parent) {
 // https://stackoverflow.com/questions/915338/how-can-i-find-the-link-url-by-link-text-with-xpath
 //
 var myLink = getElementsByXPath("//ul[@class='nav nav-pills nav-stacked']/li/a");
+var isManual = false;
 
 //===========
 // get iFrame element from bookmode content
@@ -149,7 +150,11 @@ myFrame.onload = function () {
     // https://www.w3schools.com/jsref/met_win_settimeout.asp
     //
     setTimeout(function(){
-        triggerDownload(myFrame);
+        if (!isManual) {
+            triggerDownload(myFrame);
+        }else{
+            isManual = false;
+        }
         gotoNextLink(onloadUnregister, myFrame.onload);
     }, 1000);
 };
@@ -163,6 +168,5 @@ myFrame.onload = function () {
 // Creating and triggering events - Web developer guides | MDN
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 //
-myLink.shift(); // remove first elemment to avoid duplicate download
+isManual = true; // to avoid duplicate download
 myFrame.dispatchEvent(new Event('load'));
-
