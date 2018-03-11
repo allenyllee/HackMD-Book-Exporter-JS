@@ -83,6 +83,12 @@ function triggerDownload(Frame){
 // go to next page link callback function
 //============
 function gotoNextLink(unregister, eventHandler) {
+
+    if (myLink.length == 0) {
+        unregister(eventHandler);
+        return;
+    }
+
     // JavaScript Array shift() Method
     //https://www.w3schools.com/jsref/jsref_shift.asp
     //
@@ -111,9 +117,6 @@ function gotoNextLink(unregister, eventHandler) {
 
     myFrame.contentWindow.document.location.href = myLink_data_href;
 
-    if (myLink.length == 0) {
-        unregister(eventHandler);
-    }
 }
 
 //=============
@@ -126,15 +129,18 @@ function onloadUnregister(onloadHandler){
 }
 
 //=============
-// register onload event to the bookmode content iframe
+// register onload event to the current bookmode content iframe
 //=============
+// javascript - How to execute a function when page has fully loaded? - Stack Overflow
+// https://stackoverflow.com/questions/1033398/how-to-execute-a-function-when-page-has-fully-loaded
+//
 myFrame.onload = function() {
-    gotoNextLink(onloadUnregister, myFrame.onload);
     triggerDownload(myFrame);
+    gotoNextLink(onloadUnregister, myFrame.onload);
 };
 
 //===========
-// trigger onload event to the current bookmode content iframe
+// trigger the onload event of the current bookmode content iframe
 //===========
 // Force a window.onload event in javascript - Stack Overflow
 // https://stackoverflow.com/questions/9642823/force-a-window-onload-event-in-javascript
