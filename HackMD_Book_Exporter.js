@@ -148,9 +148,10 @@ myFrame.onload = function () {
     // Window setTimeout() Method
     // https://www.w3schools.com/jsref/met_win_settimeout.asp
     //
-    setTimeout(function(){}, 1000);
-    triggerDownload(myFrame);
-    gotoNextLink(onloadUnregister, myFrame.onload);
+    setTimeout(function(){
+        triggerDownload(myFrame);
+        gotoNextLink(onloadUnregister, myFrame.onload);
+    }, 1000);
 };
 
 //===========
@@ -164,3 +165,4 @@ myFrame.onload = function () {
 //
 myLink.shift(); // remove first elemment to avoid duplicate download
 myFrame.dispatchEvent(new Event('load'));
+
