@@ -39,7 +39,7 @@ var myLink = getElementsByXPath("//ul[@class='nav nav-pills nav-stacked']/li/a")
 //===========
 // get iFrame element from bookmode content
 //===========
-function getframe(){
+function getframe() {
     // Location href Property
     // https://www.w3schools.com/jsref/prop_loc_href.asp
     // 透過HTML DOM 的 Location Object 的 href Property 取得目前頁面的URL
@@ -51,7 +51,7 @@ function getframe(){
     // 最後利用replace()方法使用RegEx 將所有%符號移除
     var pos = str.indexOf("https%3A%2F%2Fhackmd.io%2F");
     str = str.slice(pos);
-    str = str.replace(/%/g,"");
+    str = str.replace(/%/g, "");
     // javascript - Get element from within an iFrame - Stack Overflow
     // https://stackoverflow.com/questions/1088544/get-element-from-within-an-iframe
     // 從iframe 的id 取回裡面的內容
@@ -63,7 +63,7 @@ var myFrame = getframe();
 //===============
 // trigger click to download .md file event from bookmode iframe element
 //===============
-function triggerDownload(Frame){
+function triggerDownload(Frame) {
     var innerDoc = Frame.contentDocument || Frame.contentWindow.document;
     // HTML DOM getElementsByClassName() Method
     // https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp
@@ -73,7 +73,10 @@ function triggerDownload(Frame){
     //How to trigger event in JavaScript? - Stack Overflow
     //https://stackoverflow.com/questions/2490825/how-to-trigger-event-in-javascript
     // 模仿按下下載連結時觸發click event
-    var event = new CustomEvent('click', {bubbles: true, cancelable: true});
+    var event = new CustomEvent('click', {
+        bubbles: true,
+        cancelable: true
+    });
     x[1].dispatchEvent(event);
 }
 
@@ -119,12 +122,13 @@ function gotoNextLink(unregister, eventHandler) {
 
 }
 
+
 //=============
 // unregister onload event while no further pages
 //=============
 // jquery - Javascript - Cancel onload event - Stack Overflow
 // https://stackoverflow.com/questions/3717205/javascript-cancel-onload-event
-function onloadUnregister(onloadHandler){
+function onloadUnregister(onloadHandler) {
     onloadHandler = null;
 }
 
@@ -134,7 +138,17 @@ function onloadUnregister(onloadHandler){
 // javascript - How to execute a function when page has fully loaded? - Stack Overflow
 // https://stackoverflow.com/questions/1033398/how-to-execute-a-function-when-page-has-fully-loaded
 //
-myFrame.onload = function() {
+// javascript - Capture iframe load complete event - Stack Overflow
+// https://stackoverflow.com/questions/3142837/capture-iframe-load-complete-event
+//
+// html - JavaScript that executes after page load - Stack Overflow
+// https://stackoverflow.com/questions/807878/javascript-that-executes-after-page-load
+//
+myFrame.onload = function () {
+    // Window setTimeout() Method
+    // https://www.w3schools.com/jsref/met_win_settimeout.asp
+    //
+    setTimeout(function(){}, 1000);
     triggerDownload(myFrame);
     gotoNextLink(onloadUnregister, myFrame.onload);
 };
@@ -148,4 +162,5 @@ myFrame.onload = function() {
 // Creating and triggering events - Web developer guides | MDN
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
 //
+myLink.shift(); // remove first elemment to avoid duplicate download
 myFrame.dispatchEvent(new Event('load'));
