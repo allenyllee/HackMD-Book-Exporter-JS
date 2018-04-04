@@ -156,7 +156,7 @@ myFrame.onload = function () {
             isManual = false;
         }
         gotoNextLink(onloadUnregister, myFrame.onload);
-    }, 1000);
+    }, 2000);
 };
 
 //===========
