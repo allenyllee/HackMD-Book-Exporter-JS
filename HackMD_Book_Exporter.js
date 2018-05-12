@@ -161,7 +161,7 @@ myFrame.onload = function () {
         }else{
             isManual = false;
         }
-        gotoNextLink(onloadUnregister, myFrame.onload)
+        setTimeout(gotoNextLink(onloadUnregister, myFrame.onload),10000);
     }, 3000);
 };
 
