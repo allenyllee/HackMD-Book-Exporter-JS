@@ -154,13 +154,15 @@ myFrame.onload = function () {
     // Window setTimeout() Method
     // https://www.w3schools.com/jsref/met_win_settimeout.asp
     //
-    if (!isManual) {
-        setTimeout(triggerDownload(myFrame),20000);
-        //triggerDownload(myFrame);
-    }else{
-        isManual = false;
-    }
-    setTimeout(gotoNextLink(onloadUnregister, myFrame.onload), 30000);
+    setTimeout(function(){
+        if (!isManual) {
+            setTimeout(triggerDownload(myFrame),20000);
+            //triggerDownload(myFrame);
+        }else{
+            isManual = false;
+        }
+        gotoNextLink(onloadUnregister, myFrame.onload)
+    }, 30000);
 };
 
 //===========
