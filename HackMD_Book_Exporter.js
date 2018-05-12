@@ -155,7 +155,7 @@ myFrame.onload = function () {
     // https://www.w3schools.com/jsref/met_win_settimeout.asp
     //
     if (!isManual) {
-        setTimeout(triggerDownload(myFrame),5000);
+        setTimeout(triggerDownload(myFrame),10000);
         //triggerDownload(myFrame);
     }else{
         isManual = false;
