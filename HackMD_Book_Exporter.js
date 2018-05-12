@@ -52,6 +52,9 @@ function getframe() {
     // 最後利用replace()方法使用RegEx 將所有%符號移除
     var pos = str.indexOf("https%3A%2F%2Fhackmd.io%2F");
     str = str.slice(pos);
+    
+    // WindowOrWorkerGlobalScope.btoa() - Web APIs | MDN
+    // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/btoa
     str = window.btoa(str) // HackMD's frame id had changed to use base64
     //str = str.replace(/%/g, ""); // Discard: HackMD's frame id had changed to use base64
     
