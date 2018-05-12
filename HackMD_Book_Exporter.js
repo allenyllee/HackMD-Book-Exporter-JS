@@ -156,13 +156,13 @@ myFrame.onload = function () {
     //
     setTimeout(function(){
         if (!isManual) {
-            setTimeout(triggerDownload(myFrame),20000);
+            setTimeout(triggerDownload(myFrame),10000);
             //triggerDownload(myFrame);
         }else{
             isManual = false;
         }
         gotoNextLink(onloadUnregister, myFrame.onload)
-    }, 30000);
+    }, 3000);
 };
 
 //===========
