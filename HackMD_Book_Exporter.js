@@ -156,7 +156,8 @@ myFrame.onload = function () {
     //
     setTimeout(function(){
         if (!isManual) {
-            triggerDownload(myFrame);
+            setTimeout(triggerDownload(myFrame),3000);
+            //triggerDownload(myFrame);
         }else{
             isManual = false;
         }
