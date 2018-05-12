@@ -52,7 +52,9 @@ function getframe() {
     // 最後利用replace()方法使用RegEx 將所有%符號移除
     var pos = str.indexOf("https%3A%2F%2Fhackmd.io%2F");
     str = str.slice(pos);
-    str = str.replace(/%/g, "");
+    str = window.btoa(str) // HackMD's frame id had changed to use base64
+    //str = str.replace(/%/g, ""); // Discard: HackMD's frame id had changed to use base64
+    
     // javascript - Get element from within an iFrame - Stack Overflow
     // https://stackoverflow.com/questions/1088544/get-element-from-within-an-iframe
     // 從iframe 的id 取回裡面的內容
