@@ -18,7 +18,7 @@ This is a bookmarklet which was created to export all pages from HackMD listed i
 
 2. Then click the __HackMD-Book-Export__ from your bookmark toolbar, it'll trigger Markdown download option, and jump to next page
 
-    ![](https://i.imgur.com/JGFwVrS.png)
+    ![](https://i.imgur.com/JvEkW5j.png)
 
 3. You'll see a new file download dialog every time it jumps to the next page. 
 
@@ -26,5 +26,5 @@ This is a bookmarklet which was created to export all pages from HackMD listed i
     
     Note2: You can check __"Do this automatically for files like this from now on"__ to avoid further prompt.
 
-    ![](https://i.imgur.com/JGFwVrS.png)
+    ![](https://i.imgur.com/LSirRa7.png)
 
