@@ -26,5 +26,5 @@ This is a bookmarklet which was created to export all pages from HackMD listed i
     
     Note2: You can check __"Do this automatically for files like this from now on"__ to avoid further prompt.
 
-    ![](https://screenshotscdn.firefoxusercontent.com/images/2acadd2f-bf6e-44d8-ba5f-62856d05bce8.png)
+    ![](https://i.imgur.com/JGFwVrS.png)
 
