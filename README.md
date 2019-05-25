@@ -14,7 +14,7 @@ This is a bookmarklet which was created to export all pages from HackMD listed i
 
 1. Go to your summary page which contains all the URL of you pages, and click Book mode
 
-    ![](https://screenshotscdn.firefoxusercontent.com/images/f5a9cbd3-1014-4388-83f2-0095c609e6c1.png)
+    ![](https://i.imgur.com/JGFwVrS.png)
 
 2. Then click the __HackMD-Book-Export__ from your bookmark toolbar, it'll trigger Markdown download option, and jump to next page
 
